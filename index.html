@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Business Card</title>
+
+  <!-- Google Fonts: one typewriter-style mono for the "typed" data fields,
+       one serif for the name/headline, so the two roles feel distinct -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="board">
+
+    <!-- The card itself. It flips between .front and .back when clicked. -->
+    <section class="card" id="card" tabindex="0" role="button"
+              aria-label="Business card. Press Enter or click to flip." aria-pressed="false">
+      <div class="card-inner">
+
+        <!-- FRONT FACE -->
+        <div class="face face-front">
+          <div class="punch-holes" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+
+          <div class="ruled-lines" aria-hidden="true"></div>
+
+          <p class="index-label" aria-hidden="true">CONTACT — CARD 01</p>
+
+          <div class="photo-slot" id="photo-slot">
+            <span>PHOTO</span>
+          </div>
+
+          <h1 class="name">Your Name</h1>
+          <p class="role">B.Tech, Computer Science &amp; Engineering</p>
+          <p class="tagline">Building things, one line of code at a time.</p>
+
+          <p class="flip-hint">tap the card to flip →</p>
+        </div>
+
+        <!-- BACK FACE -->
+        <div class="face face-back">
+          <p class="index-label" aria-hidden="true">FILED UNDER — CONTACT INFO</p>
+
+          <dl class="detail-list">
+            <div class="detail-row">
+              <dt>Email</dt>
+              <dd><a href="mailto:you@example.com">you@example.com</a></dd>
+            </div>
+            <div class="detail-row">
+              <dt>Phone</dt>
+              <dd><a href="tel:+910000000000">+91 00000 00000</a></dd>
+            </div>
+            <div class="detail-row">
+              <dt>College</dt>
+              <dd>Your College Name</dd>
+            </div>
+            <div class="detail-row">
+              <dt>Location</dt>
+              <dd>Indore, Madhya Pradesh</dd>
+            </div>
+            <div class="detail-row">
+              <dt>Links</dt>
+              <dd class="links-row">
+                <a href="https://github.com/yourhandle" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://linkedin.com/in/yourhandle" target="_blank" rel="noopener">LinkedIn</a>
+              </dd>
+            </div>
+          </dl>
+
+          <button class="save-btn" id="save-btn" type="button">
+            ↓ Save to Contacts (.vcf)
+          </button>
+
+          <p class="flip-hint">← tap to flip back</p>
+        </div>
+
+      </div>
+    </section>
+
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+      ☾
+    </button>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
