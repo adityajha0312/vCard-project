@@ -1,6 +1,7 @@
-/* -----------------------------------------------------------
+/* =========================================================
    THEME TOKENS
------------------------------------------------------------ */
+   ========================================================= */
+
 :root {
   --bg: #0c0e14;
   --bg-glow-a: #1b2a4a;
@@ -35,161 +36,314 @@
   --shadow: rgba(30, 30, 40, 0.18);
 }
 
-/* -----------------------------------------------------------
+
+/* =========================================================
    RESET
------------------------------------------------------------ */
-* { box-sizing: border-box; }
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+}
 
 body {
   margin: 0;
   min-height: 100vh;
+  width: 100%;
+
   font-family: "Manrope", sans-serif;
   color: var(--text-primary);
   background: var(--bg);
-  transition: background-color 0.4s ease, color 0.4s ease;
+
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
 }
 
-/* -----------------------------------------------------------
+
+/* =========================================================
    SCENE / BACKDROP
------------------------------------------------------------ */
+   ========================================================= */
+
 .scene {
   position: relative;
+
   min-height: 100vh;
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 48px 20px;
+
   overflow: hidden;
 }
 
 .scene::before,
 .scene::after {
   content: "";
+
   position: absolute;
+
   width: 480px;
   height: 480px;
+
   border-radius: 50%;
+
   filter: blur(120px);
   opacity: 0.55;
+
   z-index: 0;
+
+  pointer-events: none;
 }
+
 .scene::before {
   background: var(--bg-glow-a);
+
   top: -120px;
   left: -120px;
 }
+
 .scene::after {
   background: var(--bg-glow-b);
-  bottom: -140px;
+
   right: -100px;
+  bottom: -140px;
 }
 
-/* -----------------------------------------------------------
-   CARD
------------------------------------------------------------ */
+
+/* =========================================================
+   CARD — MOBILE DEFAULT
+   ========================================================= */
+
 .card {
   position: relative;
   z-index: 1;
-  width: min(380px, 92vw);
+
+  width: min(380px, 100%);
+
   background: var(--card-bg);
+
   border: 1px solid var(--card-border);
   border-radius: 24px;
+
   padding: 40px 32px 32px;
+
   text-align: center;
-  box-shadow: 0 30px 60px -20px var(--shadow);
-  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  box-shadow:
+    0 30px 60px -20px var(--shadow);
+
+  animation:
+    rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(18px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card { animation: none; }
+  .card {
+    animation: none;
+  }
 }
 
-/* -----------------------------------------------------------
+
+/* =========================================================
+   CARD GLOW
+   ========================================================= */
+
+.card-glow {
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  top: -90px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: var(--accent);
+
+  opacity: 0.06;
+
+  filter: blur(50px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
    AVATAR
------------------------------------------------------------ */
+   ========================================================= */
+
 .avatar-ring {
   width: 108px;
   height: 108px;
+
   margin: 0 auto 20px;
+
   border-radius: 50%;
+
   padding: 3px;
-  background: conic-gradient(from 180deg, var(--accent), transparent 40%, var(--accent));
+
+  background:
+    conic-gradient(
+      from 180deg,
+      var(--accent),
+      transparent 40%,
+      var(--accent)
+    );
+
+  flex-shrink: 0;
 }
 
 .avatar {
   width: 100%;
   height: 100%;
+
   border-radius: 50%;
+
   object-fit: cover;
+
   display: block;
+
   border: 3px solid var(--card-bg);
 }
 
-/* -----------------------------------------------------------
-   TEXT BLOCK
------------------------------------------------------------ */
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
 .name {
+  margin: 0 0 6px;
+
   font-family: "Playfair Display", serif;
+
   font-size: 28px;
   font-weight: 700;
-  margin: 0 0 6px;
+
+  line-height: 1.15;
+
   letter-spacing: 0.01em;
 }
 
 .role {
   margin: 0 0 4px;
+
   font-size: 13.5px;
   font-weight: 600;
+
+  line-height: 1.5;
+
   color: var(--accent);
+
   text-transform: uppercase;
+
   letter-spacing: 0.06em;
 }
 
 .org-line {
   margin: 0 0 16px;
+
   font-size: 13px;
+
+  line-height: 1.5;
+
   color: var(--text-muted);
 }
 
 .tagline {
   margin: 0 0 22px;
+
   font-size: 13.5px;
   font-style: italic;
+
+  line-height: 1.5;
+
   color: var(--text-muted);
 }
 
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
 .divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--card-border) 20%, var(--card-border) 80%, transparent);
+
   margin: 0 0 22px;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      var(--card-border) 20%,
+      var(--card-border) 80%,
+      transparent
+    );
 }
 
-/* -----------------------------------------------------------
-   CONTACT LIST
------------------------------------------------------------ */
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
 .contact-list {
   list-style: none;
+
   margin: 0 0 22px;
   padding: 0;
+
   display: flex;
   flex-direction: column;
+
   gap: 10px;
 }
 
 .contact-list li {
   display: flex;
+
   align-items: center;
+
   gap: 12px;
+
+  min-width: 0;
+
   padding: 10px 14px;
+
   border-radius: 12px;
+
   background: var(--accent-soft);
+
   text-align: left;
-  transition: transform 0.2s ease;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.3s ease;
 }
 
 .contact-list li:hover {
@@ -197,11 +351,16 @@ body {
 }
 
 .contact-list .icon {
-  flex: none;
+  flex: 0 0 18px;
+
   width: 18px;
   height: 18px;
+
   color: var(--accent);
+
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contact-list .icon svg {
@@ -210,64 +369,114 @@ body {
 }
 
 .contact-list a {
+  min-width: 0;
+
   color: var(--text-primary);
+
   text-decoration: none;
+
   font-size: 13.5px;
   font-weight: 500;
-  word-break: break-word;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
 }
 
-/* -----------------------------------------------------------
+.contact-list a:hover {
+  color: var(--accent);
+}
+
+
+/* =========================================================
    SOCIAL BUTTONS
------------------------------------------------------------ */
+   ========================================================= */
+
 .social-row {
   display: flex;
+
   gap: 10px;
+
   margin-bottom: 14px;
 }
 
 .social-btn {
   flex: 1;
+
+  min-width: 0;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   gap: 7px;
-  padding: 10px 0;
+
+  padding: 10px;
+
   border-radius: 10px;
+
   border: 1px solid var(--card-border);
+
   color: var(--text-primary);
+
   text-decoration: none;
+
   font-size: 12.5px;
   font-weight: 600;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.15s ease;
 }
 
 .social-btn:hover,
 .social-btn:focus-visible {
   border-color: var(--accent);
+
   background: var(--accent-soft);
+
+  transform: translateY(-1px);
 }
 
-/* -----------------------------------------------------------
+
+/* =========================================================
    SAVE BUTTON
------------------------------------------------------------ */
+   ========================================================= */
+
 .save-btn {
   width: 100%;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   gap: 8px;
+
   padding: 13px;
+
   border: none;
+
   border-radius: 12px;
+
   background: var(--accent);
+
   color: #14120a;
+
   font-family: "Manrope", sans-serif;
+
   font-size: 14px;
   font-weight: 700;
+
   letter-spacing: 0.01em;
+
   cursor: pointer;
-  transition: filter 0.2s ease, transform 0.15s ease;
+
+  transition:
+    filter 0.2s ease,
+    transform 0.15s ease;
 }
 
 .save-btn:hover,
@@ -279,31 +488,334 @@ body {
   transform: scale(0.98);
 }
 
-/* -----------------------------------------------------------
+
+/* =========================================================
    THEME TOGGLE
------------------------------------------------------------ */
+   ========================================================= */
+
 .theme-toggle {
   position: absolute;
+
   top: 20px;
-  right: max(20px, calc(50vw - 190px));
-  z-index: 2;
-  width: 38px;
-  height: 38px;
+  right: 20px;
+
+  z-index: 5;
+
+  width: 40px;
+  height: 40px;
+
   border-radius: 50%;
+
   border: 1px solid var(--card-border);
+
   background: var(--card-bg);
+
   color: var(--text-primary);
+
   font-size: 16px;
+
   cursor: pointer;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  box-shadow: 0 8px 20px -10px var(--shadow);
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.2s ease;
 }
 
-/* -----------------------------------------------------------
-   RESPONSIVE
------------------------------------------------------------ */
+.theme-toggle:hover {
+  transform: rotate(10deg) scale(1.05);
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
 @media (max-width: 380px) {
-  .card { padding: 32px 22px 26px; }
-  .name { font-size: 24px; }
+
+  .scene {
+    padding: 70px 14px 30px;
+  }
+
+  .card {
+    padding: 32px 22px 26px;
+
+    border-radius: 20px;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+
+  .role {
+    font-size: 12px;
+  }
+
+  .org-line {
+    font-size: 12px;
+  }
+
+  .avatar-ring {
+    width: 96px;
+    height: 96px;
+  }
+
+  .contact-list a {
+    font-size: 12.5px;
+  }
+}
+
+
+/* =========================================================
+   TABLETS
+   ========================================================= */
+
+@media (min-width: 600px) {
+
+  .scene {
+    padding: 60px 30px;
+  }
+
+  .card {
+    width: min(460px, 100%);
+
+    padding: 44px 40px 36px;
+
+    border-radius: 26px;
+  }
+
+  .name {
+    font-size: 30px;
+  }
+
+  .avatar-ring {
+    width: 116px;
+    height: 116px;
+  }
+}
+
+
+/* =========================================================
+   LAPTOP / DESKTOP
+   ========================================================= */
+
+@media (min-width: 900px) {
+
+  .scene {
+    padding: 60px;
+  }
+
+  .card {
+    width: min(760px, 90vw);
+
+    min-height: 390px;
+
+    padding: 46px;
+
+    display: grid;
+
+    grid-template-columns: 210px 1fr;
+
+    column-gap: 42px;
+
+    align-items: center;
+
+    text-align: left;
+
+    border-radius: 28px;
+  }
+
+  /* Photo section */
+
+  .avatar-ring {
+    grid-column: 1;
+    grid-row: 1 / span 7;
+
+    width: 170px;
+    height: 170px;
+
+    margin: 0 auto;
+
+    padding: 4px;
+  }
+
+  .avatar {
+    border-width: 4px;
+  }
+
+  /* Everything else */
+
+  .name {
+    grid-column: 2;
+
+    margin: 0 0 5px;
+
+    font-size: 34px;
+
+    line-height: 1.1;
+  }
+
+  .role {
+    grid-column: 2;
+
+    margin: 0 0 5px;
+
+    font-size: 13px;
+  }
+
+  .org-line {
+    grid-column: 2;
+
+    margin: 0 0 13px;
+
+    font-size: 13px;
+  }
+
+  .tagline {
+    grid-column: 2;
+
+    margin: 0 0 18px;
+
+    font-size: 13.5px;
+  }
+
+  .divider {
+    grid-column: 2;
+
+    width: 100%;
+
+    margin: 0 0 18px;
+  }
+
+  .contact-list {
+    grid-column: 2;
+
+    margin: 0 0 18px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+  }
+
+  .contact-list li {
+    min-width: 0;
+
+    padding: 9px 11px;
+  }
+
+  .contact-list a {
+    font-size: 12px;
+  }
+
+  .social-row {
+    grid-column: 2;
+
+    margin-bottom: 10px;
+  }
+
+  .social-btn {
+    padding: 9px;
+
+    font-size: 12px;
+  }
+
+  .save-btn {
+    grid-column: 2;
+
+    width: 100%;
+
+    padding: 12px;
+  }
+
+  /*
+     Desktop glow is slightly larger
+     because the card itself is larger.
+  */
+
+  .card-glow {
+    width: 300px;
+    height: 300px;
+
+    top: -150px;
+  }
+}
+
+
+/* =========================================================
+   LARGE LAPTOP / DESKTOP
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+  .card {
+    width: min(820px, 85vw);
+
+    grid-template-columns: 230px 1fr;
+
+    column-gap: 48px;
+
+    padding: 52px;
+  }
+
+  .avatar-ring {
+    width: 185px;
+    height: 185px;
+  }
+
+  .name {
+    font-size: 38px;
+  }
+
+  .role {
+    font-size: 13.5px;
+  }
+
+  .org-line {
+    font-size: 13.5px;
+  }
+
+  .tagline {
+    font-size: 14px;
+  }
+
+  .contact-list a {
+    font-size: 12.5px;
+  }
+}
+
+
+/* =========================================================
+   VERY SHORT LAPTOP SCREENS
+   ========================================================= */
+
+@media (min-width: 900px) and (max-height: 650px) {
+
+  .scene {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+
+  .card {
+    padding: 34px 42px;
+
+    min-height: auto;
+  }
+
+  .avatar-ring {
+    width: 145px;
+    height: 145px;
+  }
+
+  .name {
+    font-size: 30px;
+  }
 }
