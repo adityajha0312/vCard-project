@@ -58,12 +58,12 @@ const saveBtn = document.getElementById("save-btn");
 
 // EDIT these values to match the details shown on the card above
 const contactInfo = {
-  fullName: "Your Name",
-  role: "B.Tech, Computer Science & Engineering",
-  email: "you@example.com",
-  phone: "+910000000000",
-  org: "Your College Name",
-  website: "https://github.com/yourhandle",
+  fullName: "Aditya Kumar",
+  role: "B.Tech, Computer Science and Engineering",
+  email: "avdadityajha@gmail.com",
+  phone: "+918271421003",
+  org: "SISTec Bhopal",
+  website: "https://github.com/adityajha0312",
 };
 
 function buildVCardText(info) {
