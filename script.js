@@ -1,34 +1,13 @@
 /* =============================================================
-   1. FLIP THE CARD ON CLICK OR KEYBOARD (Enter / Space)
-   ============================================================= */
-const card = document.getElementById("card");
-
-function toggleFlip() {
-  const isFlipped = card.classList.toggle("is-flipped");
-  card.setAttribute("aria-pressed", isFlipped);
-}
-
-card.addEventListener("click", toggleFlip);
-
-card.addEventListener("keydown", (event) => {
-  // Only react to Enter or Space, and stop the page from scrolling on Space
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    toggleFlip();
-  }
-});
-
-/* =============================================================
-   2. DARK MODE TOGGLE
-   Preference is remembered in localStorage so it persists
-   across page reloads.
+   1. THEME TOGGLE (dark default, light optional)
+   Preference remembered in localStorage.
    ============================================================= */
 const themeToggleBtn = document.getElementById("theme-toggle");
 const root = document.documentElement;
 
 function applyTheme(theme) {
-  if (theme === "dark") {
-    root.setAttribute("data-theme", "dark");
+  if (theme === "light") {
+    root.setAttribute("data-theme", "light");
     themeToggleBtn.textContent = "☀";
   } else {
     root.removeAttribute("data-theme");
@@ -36,27 +15,21 @@ function applyTheme(theme) {
   }
 }
 
-// On load: use saved preference, otherwise fall back to system preference
 const savedTheme = localStorage.getItem("vcard-theme");
-const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-applyTheme(savedTheme || (systemPrefersDark ? "dark" : "light"));
+applyTheme(savedTheme || "dark");
 
 themeToggleBtn.addEventListener("click", () => {
-  const current = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-  const next = current === "dark" ? "light" : "dark";
+  const current = root.getAttribute("data-theme") === "light" ? "light" : "dark";
+  const next = current === "light" ? "dark" : "light";
   applyTheme(next);
   localStorage.setItem("vcard-theme", next);
 });
 
 /* =============================================================
-   3. GENERATE AND DOWNLOAD A REAL .VCF (VCARD) FILE
-   This is the part that makes it an actual "vCard" project,
-   not just a page that looks like a business card.
-   The vCard format is plain text following the vCard 3.0 spec.
+   2. GENERATE AND DOWNLOAD A REAL .VCF (VCARD) FILE
    ============================================================= */
 const saveBtn = document.getElementById("save-btn");
 
-// EDIT these values to match the details shown on the card above
 const contactInfo = {
   fullName: "Aditya Kumar",
   role: "B.Tech, Computer Science and Engineering",
@@ -67,8 +40,6 @@ const contactInfo = {
 };
 
 function buildVCardText(info) {
-  // \n line breaks here become real newlines in the downloaded file.
-  // VERSION:3.0 is the most widely supported vCard revision.
   return [
     "BEGIN:VCARD",
     "VERSION:3.0",
@@ -84,9 +55,6 @@ function buildVCardText(info) {
 
 saveBtn.addEventListener("click", () => {
   const vCardText = buildVCardText(contactInfo);
-
-  // Turn the text into a downloadable file in the browser,
-  // without needing any server or backend code.
   const blob = new Blob([vCardText], { type: "text/vcard" });
   const url = URL.createObjectURL(blob);
 
@@ -97,5 +65,5 @@ saveBtn.addEventListener("click", () => {
   tempLink.click();
   document.body.removeChild(tempLink);
 
-  URL.revokeObjectURL(url); // free up memory once the download starts
+  URL.revokeObjectURL(url);
 });
